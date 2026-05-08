@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SaludVital | Clínica de Salud</title>
+<link rel="stylesheet" href="../Css/styles.css">
+</head>
+<body>
+<header class="site-header">
+    <div class="container header-inner">
+    <a class="brand" href="#inicio">
+        <img src="../images/Logotipo.png" alt="Logo SaludVital" class="logo">
+        <div>
+        <h1>SaludVital</h1>
+        <p>Bienestar integral para tu familia</p>
+        </div>
+    </a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    <nav class="site-nav" id="main-nav">
+        <a href="#inicio">Inicio</a>
+        <a href="#agenda">Agenda</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+    </div>
+</header>
+
+<main>
+    <section class="hero" id="inicio">
+    <div class="container hero-content fade-up">
+        <div class="hero-copy">
+        <p class="eyebrow">Clínica SaludVital</p>
+        <h2>Atención médica confiable y personalizada para toda la familia</h2>
+        <p>Potenciamos tu bienestar con diagnósticos avanzados y un equipo médico comprometido en cada paso del proceso.</p>
+        <div class="hero-actions">
+            <a class="button primary-button" href="#agenda">Gestiona tu cita</a>
+            <a class="button outline-button" href="#servicios">Ver servicios</a>
+        </div>
+        <div class="hero-quick-info">
+            <article class="hero-card">
+            <span class="hero-card-icon">🏥</span>
+            <div>
+                <strong>Más de 10 años</strong>
+                <p>de experiencia clínica.</p>
+            </div>
+            </article>
+            <article class="hero-card">
+            <span class="hero-card-icon">🩺</span>
+            <div>
+                <strong>Agendamiento en línea</strong>
+                <p>Registro, consulta, cancelación y reprogramación.</p>
+            </div>
+            </article>
+        </div>
+        </div>
+
+        <div class="hero-image-wrapper">
+        <img src="../images/Doctor.png" alt="Profesional de la salud" class="hero-image">
+        </div>
+    </div>
+    </section>
+
+    <section class="user-panel fade-up" id="agenda">
+    <div class="container panel-grid">
+        <div class="auth-card">
+        <p class="eyebrow">Cuenta de paciente</p>
+        <h2>Regístrate o inicia sesión para administrar tu agenda</h2>
+        </div>
+        <div class="tabs" role="tablist">
+            <button class="tab-button active" type="button" data-tab="login-tab">Ingresar</button>
+            <button class="tab-button" type="button" data-tab="register-tab">Registrar</button>
+        </div>
+        <div class="tab-content active" id="login-tab">
+            <form id="login-form" class="form-card">
+            <label for="login-email">Correo electrónico</label>
+            <input type="email" id="login-email" placeholder="correo@ejemplo.com" required>
+            <label for="login-password">Contraseña</label>
+            <input type="password" id="login-password" placeholder="Contraseña" required>
+            <button type="submit" class="button primary-button">Ingresar</button>
+            </form>
+        </div>
+        <div class="tab-content" id="register-tab">
+            <form id="register-form" class="form-card">
+            <label for="register-name">Nombre completo</label>
+            <input type="text" id="register-name" placeholder="Tu nombre" required>
+            <label for="register-email">Correo electrónico</label>
+            <input type="email" id="register-email" placeholder="correo@ejemplo.com" required>
+            <label for="register-password">Contraseña</label>
+            <input type="password" id="register-password" placeholder="Mínimo 6 caracteres" required>
+            <button type="submit" class="button outline-button">Registrar</button>
+            </form>
+        </div>
+        <p id="auth-message" class="form-status" aria-live="polite"></p>
+        </div>
+
+        <div class="status-card">
+        <p class="eyebrow">Panel</p>
+        <h2>Estado de sesión</h2>
+        <p id="status-message">Inicia sesión para agendar y ver tus citas médicas.</p>
+        <div class="badges">
+            <span class="status-badge hidden" id="user-email-badge"></span>
+            <span class="status-badge hidden" id="user-status-badge">Conectado</span>
+        </div>
+        <button id="logout-button" class="button outline-button hidden">Cerrar sesión</button>
+        </div>
+    </div>
+
+    <div class="container schedule-grid">
+        <div class="scheduler-card">
+        <h3>Consulta de disponibilidad médica</h3>
+        <form id="availability-form" class="form-card">
+            <label for="availability-doctor">Especialista</label>
+            <select id="availability-doctor" required></select>
+            <label for="availability-date">Fecha</label>
+            <input type="date" id="availability-date" required>
+            <button type="submit" class="button primary-button">Ver disponibilidad</button>
+        </form>
+        <div id="availability-result" class="availability-result" aria-live="polite"></div>
+        </div>
+
+        <div class="scheduler-card">
+        <h3>Agendar cita médica</h3>
+        <form id="appointment-form" class="form-card">
+            <label for="appointment-service">Servicio</label>
+            <select id="appointment-service" required>
+            <option value="Consulta general">Consulta general</option>
+            <option value="Medicina familiar">Medicina familiar</option>
+            <option value="Salud emocional">Salud emocional</option>
+            <option value="Diagnóstico rápido">Diagnóstico rápido</option>
+            </select>
+            <label for="appointment-doctor">Especialista</label>
+            <select id="appointment-doctor" required></select>
+            <label for="appointment-date">Fecha</label>
+            <input type="date" id="appointment-date" required>
+            <label for="appointment-time">Hora</label>
+            <input type="time" id="appointment-time" required>
+            <button type="submit" class="button primary-button">Reservar cita</button>
+        </form>
+        <p class="form-note">Los recordatorios se enviarán automáticamente al correo registrado cuando la cita esté próxima.</p>
+        </div>
+    </div>
+
+    <div class="container appointments-section">
+        <div class="section-header">
+        <p class="eyebrow">Mis citas</p>
+        <h2>Gestiona tus citas médicas</h2>
+        </div>
+        <div id="appointments-list" class="appointments-list">Necesitas iniciar sesión para ver tus citas.</div>
+    </div>
+
+    <div class="container reminders-section fade-up">
+        <div class="section-header">
+        <p class="eyebrow">Recordatorios</p>
+        <h2>Historial de recordatorios enviados</h2>
+        </div>
+        <div id="reminder-log" class="reminder-log"></div>
+    </div>
+    </section>
+
+    <section class="services" id="servicios">
+    <div class="container section-header fade-up">
+        <p class="eyebrow">Nuestros servicios</p>
+        <h2>Soluciones médicas integrales con enfoque profesional</h2>
+    </div>
+    <div class="cards-grid">
+        <article class="card">
+        <img src="../images/Corazon.png" alt="Consulta general" class="card-icon">
+        <h3>Consulta general</h3>
+        <p>Exámenes de rutina, control de salud y orientación preventiva para toda la familia.</p>
+        </article>
+        <article class="card">
+        <img src="../images/Doctor.png" alt="Medicina familiar" class="card-icon">
+        <h3>Medicina familiar</h3>
+        <p>Plan de seguimiento personalizado para mantener una salud estable y equilibrada.</p>
+        </article>
+        <article class="card">
+        <img src="../images/Corazon.png" alt="Salud emocional" class="card-icon">
+        <h3>Salud emocional</h3>
+        <p>Acompañamiento psicológico para manejar estrés, ansiedad y mejorar tu calidad de vida.</p>
+        </article>
+        <article class="card">
+        <img src="../images/Doctor.png" alt="Diagnóstico rápido" class="card-icon">
+        <h3>Diagnóstico rápido</h3>
+        <p>Acceso ágil a pruebas médicas y resultados claros en tiempos más cortos.</p>
+        </article>
+    </div>
+    </section>
+
+    <section class="highlights fade-up">
+    <div class="container highlight-grid">
+        <article class="highlight-card">
+        <h3>Atención humanizada</h3>
+        <p>Cada paciente recibe un acompañamiento cercano y respetuoso desde su primera visita.</p>
+        </article>
+        <article class="highlight-card">
+        <h3>Instalaciones modernas</h3>
+        <p>Espacios limpios, seguros y equipados para ofrecer atención de calidad.</p>
+        </article>
+        <article class="highlight-card">
+        <h3>Equipo especializado</h3>
+        <p>Médicos, enfermeras y especialistas comprometidos con tu salud integral.</p>
+        </article>
+    </div>
+    </section>
+
+    <section class="about" id="nosotros">
+    <div class="container about-grid fade-up">
+        <div>
+        <p class="eyebrow">Quiénes somos</p>
+        <h2>Tu socio en el cuidado de la salud</h2>
+        <p>En SaludVital combinamos experiencia, atención cálida y procesos claros para que te sientas en buenas manos.</p>
+        <ul>
+            <li>Diagnósticos confiables y seguimiento médico constante</li>
+            <li>Tratamientos enfocados en prevención y bienestar</li>
+            <li>Apoyo rápido para toda la familia</li>
+        </ul>
+        </div>
+        <div class="about-card">
+        <h3>Compromiso con tu bienestar</h3>
+        <p>Nos enfocamos en soluciones reales: prevención, tratamiento y acompañamiento médico personalizado.</p>
+        <div class="about-details">
+            <div>
+            <strong>Profesionales</strong>
+            <p>Médicos, enfermería y especialistas en atención integral.</p>
+            </div>
+            <div>
+            <strong>Horarios</strong>
+            <p>Lunes a viernes: 8:00 - 18:00</p>
+            </div>
+        </div>
+        </div>
+    </div>
+    </section>
+
+    <section class="testimonials fade-up">
+    <div class="container section-header">
+        <p class="eyebrow">Testimonios</p>
+        <h2>Opiniones de pacientes satisfechos</h2>
+    </div>
+    <div class="testimonial-grid">
+        <article class="testimonial-card">
+        <p>"El equipo fue muy atento y resolvieron todas mis dudas. Recomiendo la clínica por su trato humano y profesionalismo."</p>
+        <strong>María López</strong>
+        </article>
+        <article class="testimonial-card">
+        <p>"Logré una atención rápida y clara. Me explicaron cada paso y siempre me sentí en confianza."</p>
+        <strong>Carlos Ramírez</strong>
+        </article>
+    </div>
+    </section>
+
+    <section class="cta-banner fade-up">
+    <div class="container cta-card">
+        <div>
+        <h2>Estamos listos para atenderte hoy</h2>
+        <p>Respaldo médico, servicios especializados y un proceso transparente desde tu primera visita.</p>
+        </div>
+        <a class="button primary-button" href="#agenda">Reserva tu consulta</a>
+    </div>
+    </section>
+
+    <section class="contact" id="contacto">
+    <div class="container contact-grid fade-up">
+        <div>
+        <p class="eyebrow">Contacto</p>
+        <h2>Agenda tu consulta hoy mismo</h2>
+        <p>Déjanos tus datos y un asesor te contactará para ayudarte de inmediato.</p>
+        <div class="contact-info">
+            <p><strong>Dirección:</strong> Av. Salud 123, Ciudad</p>
+            <p><strong>Teléfono:</strong> +57 300 123 4567</p>
+            <p><strong>Email:</strong> contacto@saludvital.com</p>
+        </div>
+        </div>
+        <form id="contact-form" class="contact-form">
+        <label for="name">Nombre completo</label>
+        <input type="text" id="name" name="name" placeholder="Tu nombre" required>
+
+        <label for="email">Correo electrónico</label>
+        <input type="email" id="email" name="email" placeholder="correo@ejemplo.com" required>
+
+        <label for="message">Mensaje</label>
+        <textarea id="message" name="message" rows="5" placeholder="Cuéntanos cómo podemos ayudarte" required></textarea>
+
+        <button type="submit" class="button primary-button">Enviar mensaje</button>
+        <p id="form-status" class="form-status" aria-live="polite"></p>
+        </form>
+    </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container footer-inner">
+    <p>© 2026 SaludVital. Clínica de salud integral.</p>
+    <p>Compromiso, cuidado y acompañamiento en cada consulta.</p>
+    </div>
+</footer>
+
+<script src="../JavaScript/app.js"></script>
+</body>
+</html>

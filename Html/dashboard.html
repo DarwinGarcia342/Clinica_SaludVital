@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel de Usuario | SaludVital</title>
+<link rel="stylesheet" href="../Css/styles.css">
+</head>
+<body>
+<header class="site-header">
+    <div class="container header-inner">
+    <a class="brand" href="Index.html">
+        <img src="../images/Logotipo.png" alt="Logo SaludVital" class="logo">
+        <div>
+        <h1>SaludVital</h1>
+        <p>Bienestar integral para tu familia</p>
+        </div>
+    </a>
+    <nav class="site-nav">
+        <a href="Index.html">Inicio</a>
+        <a href="#agenda">Agenda</a>
+        <button id="logout-button" class="button outline-button">Cerrar sesión</button>
+    </nav>
+    </div>
+</header>
+
+<main>
+    <section class="user-panel" id="agenda">
+    <div class="container panel-grid">
+        <div class="status-card">
+        <p class="eyebrow">Panel de Usuario</p>
+        <h2>Bienvenido, <span id="user-name"></span></h2>
+        <p id="status-message">Gestiona tus citas médicas desde aquí.</p>
+        <div class="badges">
+            <span class="status-badge" id="user-email-badge"></span>
+            <span class="status-badge">Conectado</span>
+        </div>
+        </div>
+
+        <div class="scheduler-card">
+        <h3>Consulta de disponibilidad médica</h3>
+        <form id="availability-form" class="form-card">
+            <label for="availability-doctor">Especialista</label>
+            <select id="availability-doctor" required></select>
+            <label for="availability-date">Fecha</label>
+            <input type="date" id="availability-date" required>
+            <button type="submit" class="button primary-button">Ver disponibilidad</button>
+        </form>
+        <div id="availability-result" class="availability-result" aria-live="polite"></div>
+        </div>
+    </div>
+
+    <div class="container schedule-grid">
+        <div class="scheduler-card">
+        <h3>Agendar cita médica</h3>
+        <form id="appointment-form" class="form-card">
+            <label for="appointment-service">Servicio</label>
+            <select id="appointment-service" required>
+            <option value="Consulta general">Consulta general</option>
+            <option value="Medicina familiar">Medicina familiar</option>
+            <option value="Salud emocional">Salud emocional</option>
+            <option value="Diagnóstico rápido">Diagnóstico rápido</option>
+            </select>
+            <label for="appointment-doctor">Especialista</label>
+            <select id="appointment-doctor" required></select>
+            <label for="appointment-date">Fecha</label>
+            <input type="date" id="appointment-date" required>
+            <label for="appointment-time">Hora</label>
+            <input type="time" id="appointment-time" required>
+            <button type="submit" class="button primary-button">Reservar cita</button>
+        </form>
+            <p class="form-note">Los recordatorios se enviarán automáticamente al correo registrado cuando la cita esté próxima.</p>
+        </div>
+    </div>
+
+    <div class="container appointments-section">
+        <div class="section-header">
+        <p class="eyebrow">Mis citas</p>
+        <h2>Gestiona tus citas médicas</h2>
+        </div>
+        <div id="appointments-list" class="appointments-list"></div>
+    </div>
+
+    <div class="container reminders-section">
+        <div class="section-header">
+        <p class="eyebrow">Recordatorios</p>
+        <h2>Historial de recordatorios enviados</h2>
+        </div>
+        <div id="reminder-log" class="reminder-log"></div>
+    </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container footer-inner">
+    <p>© 2026 SaludVital. Clínica de salud integral.</p>
+    <p>Compromiso, cuidado y acompañamiento en cada consulta.</p>
+    </div>
+</footer>
+
+<script src="../JavaScript/dashboard.js"></script>
+</body>
+</html>
