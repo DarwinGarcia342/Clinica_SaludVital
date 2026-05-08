@@ -21,7 +21,7 @@ checkReminders();
 
 // Cargar usuario actual
 function loadCurrentUser() {
-const userData = localStorage.getItem('currentUser');
+const userData = localStorage.getItem('saludvital_session');
 if (!userData) {
     window.location.href = 'Index.html';
     return;
@@ -34,7 +34,7 @@ document.getElementById('user-email-badge').textContent = currentUser.email;
 
 // Cargar citas
 function loadAppointments() {
-const stored = localStorage.getItem('appointments');
+const stored = localStorage.getItem('saludvital_appointments');
 if (stored) {
     appointments = JSON.parse(stored);
 }
@@ -129,7 +129,7 @@ if (conflict) {
 const doctor = doctors.find(d => d.id === doctorId);
 const newAppointment = {
     id: Date.now(),
-    userId: currentUser.id,
+    userId: currentUser.email, // Usar email como identificador único
     service,
     doctorId,
     doctorName: doctor.name,
@@ -154,7 +154,7 @@ alert('Cita agendada exitosamente. Recibirás un recordatorio por correo antes d
 // Renderizar citas
 function renderAppointments() {
 const list = document.getElementById('appointments-list');
-const userAppointments = appointments.filter(apt => apt.userId === currentUser.id);
+const userAppointments = appointments.filter(apt => apt.userId === currentUser.email);
 
 if (userAppointments.length === 0) {
     list.innerHTML = '<p>No tienes citas agendadas.</p>';
@@ -229,7 +229,7 @@ const now = new Date();
   const reminderThreshold = 24 * 60 * 60 * 1000; // 24 horas en ms
 
 appointments.forEach(apt => {
-    if (apt.userId === currentUser.id && apt.status === 'confirmed' && !apt.reminderSent) {
+    if (apt.userId === currentUser.email && apt.status === 'confirmed' && !apt.reminderSent) {
     const appointmentTime = new Date(`${apt.date}T${apt.time}`);
     const timeDiff = appointmentTime - now;
 
@@ -253,18 +253,18 @@ const reminder = {
     sentAt: new Date().toISOString()
 };
 
-let reminders = JSON.parse(localStorage.getItem('reminders') || '[]');
+let reminders = JSON.parse(localStorage.getItem('saludvital_reminders') || '[]');
 reminders.push(reminder);
-localStorage.setItem('reminders', JSON.stringify(reminders));
+localStorage.setItem('saludvital_reminders', JSON.stringify(reminders));
 }
 
 // Renderizar recordatorios
 function renderReminders() {
 const log = document.getElementById('reminder-log');
-const reminders = JSON.parse(localStorage.getItem('reminders') || '[]');
+const reminders = JSON.parse(localStorage.getItem('saludvital_reminders') || '[]');
 const userReminders = reminders.filter(r => {
     const apt = appointments.find(a => a.id === r.appointmentId);
-    return apt && apt.userId === currentUser.id;
+    return apt && apt.userId === currentUser.email;
 });
 
 if (userReminders.length === 0) {
@@ -282,7 +282,7 @@ log.innerHTML = userReminders.map(r => `
 
 // Logout
 function logout() {
-localStorage.removeItem('currentUser');
+localStorage.removeItem('saludvital_session');
 window.location.href = 'Index.html';
 }
 
@@ -315,5 +315,5 @@ return statusMap[status] || status;
 }
 
 function saveAppointments() {
-localStorage.setItem('appointments', JSON.stringify(appointments));
+localStorage.setItem('saludvital_appointments', JSON.stringify(appointments));
 }
